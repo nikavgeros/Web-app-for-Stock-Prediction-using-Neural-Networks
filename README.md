@@ -11,17 +11,15 @@ Implementation of Neural Networks with different achritectures and great predict
 
 ### This repository contains the following files:
 <ol>
-  <li>Restaurant Customer Reviews.ipynb, -- the main jupyter notebook of this project, containing 6 parts:</li>
-  <ul>
-    <li>Data collection and cleaning</li>
-    <li>Explanatory Data Analysis on reviews</li>
-    <li>Various model fitting</li>
-    <li>Models evaluation</li>
-  </ul>
-  <li>Restaurant_Reviews.tsv --the dataset that contains 1000 observations of reviews, and likes</li>
-  <li>final_results.csv --the predictions from the models</li>
-  <li>CountVectorizer --the converter of text documents to a matrix of token counts in binary file</li>
-  <li>RandomForestClassifier --the best model in binary file</li>
+  <li>Images folder, --contains the plots where we compare the actual prices with predicted prices on the training phase:</li>
+  <li>Logos folder --contains the logos for each company</li>
+  <li>Models folder --contains the neural networks we created which are ready for use.</li>
+  <li>Scalers folder --contains all the scalers created on the training phase for each stock</li>
+  <li>one_layer_nn.py --builds neural networks with one layer</li>
+  <li>two_layer_nn.py --builds neural networks with two layer</li>
+  <li>three_layer_nn.py --builds neural networks with three layer</li>
+  <li>utils.py --contains all the functions needed for the develepment of neural networks</li>
+  <li>stock_prediction_app.py --contains the web application implemented with streamlit</li>
 </ol>
 
 ### Books
