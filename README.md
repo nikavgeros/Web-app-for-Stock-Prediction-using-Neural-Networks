@@ -28,6 +28,6 @@ Implementation of Neural Networks with different achritectures and great predict
 * Chollet F, (2018). Deep Learning with Python, Manning
 * Geron A., (2019). Hands-on Machine Learning with Scikit-Learn, Keras & TensorFlow of Deep Learning, O’Reilly
 * Peter J. Brockwell, Richard A. Davis (2016). Introduction to TimeSeries and Forecasting 3rd Edition, Springer
-10.	Wilfredo Palma (2016). Time Series Analysis, Wiley
+* Wilfredo Palma (2016). Time Series Analysis, Wiley
 ---
 <i>N.Avgeros (February 2022)</li>
