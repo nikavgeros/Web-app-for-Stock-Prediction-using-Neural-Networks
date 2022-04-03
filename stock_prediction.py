@@ -14,6 +14,7 @@ from io import BytesIO
 st.set_page_config(layout="wide")
 # CONSTANT VARIABLES
 MODEL_PATH = "Models"
+SCALER_PATH = "Scalers"
 START = "2016-1-1"
 TODAY = date.today().strftime("%Y-%m-%d")
 STOCKS =('AAPL', 'AMZN', 'GE', 'GOOGL', 'IBM', 'MSFT', 'TSLA')
@@ -203,7 +204,7 @@ else:
     with col4:
         selected_model = st.selectbox("Select Neural Network architecture", MODEL)
     with col5:
-        hidden_layers = st.number_input("Hidden layers:", 1, 3)-1
+        hidden_layers = st.number_input("Hidden layers:", 1, 3)
     with col6:
         n_days = st.slider("Days of prediction:", 1, 60)
 
@@ -212,21 +213,29 @@ else:
     # PREDICT BUTTON AND DISPLAY PREDICTIONS
     if st.button('Predict'):
 
-        # LOADING THE MODEL
-        local_model = load_model(MODEL_PATH + f'\{selected_stock}_{selected_model}_{hidden_layers}h.h5')
+        # Define layer folder
+        if selected_model==1:
+            LAYER_FOLDER = "\\One layer\\"
+        elif selected_model==2:
+            LAYER_FOLDER = "\\Two layers\\"
+        else:
+            LAYER_FOLDER = "\\Three layers\\"
+
+        # Load the neural network
+        local_model = load_model(MODEL_PATH + LAYER_FOLDER + f'\{selected_stock}_{selected_model}_{hidden_layers}layers.h5')
         
-        # LOADING THE SCALER 
-        scaler = MODEL_PATH + f"\{selected_stock}_Scaler_{hidden_layers}h.pickle"
+        # Load the scaler
+        scaler = MODEL_PATH + LAYER_FOLDER + f"\{selected_stock}_Scaler_{hidden_layers}layers.pickle"
         local_scaler = pickle.load(open(scaler, 'rb'))
 
-        # CREATING NUMPY ARRAY
+        # Get the last timesteps
         last_timesteps_days = pd.DataFrame(data['Close'].tail(TIMESTEPS))
         last_timesteps_days = last_timesteps_days.values
 
-        # SCALING 
-        to_predict_scaled = local_scaler.fit_transform(last_timesteps_days)
+        # Scaling the data 
+        to_predict_scaled = local_scaler.transform(last_timesteps_days)
 
-        # LOOP TO MAKE N DAYS PREDICTION LIST 
+        # Create prediction list for n days 
         for day in range(n_days):
             inputs = to_predict_scaled[day:]
             inputs_reshaped = inputs.reshape(1, inputs.shape[0], 1)
@@ -235,13 +244,12 @@ else:
             to_predict_scaled = np.append(to_predict_scaled, predict[0])
 
         to_predict_scaled = to_predict_scaled.reshape(-1,1)
-
+        
         predictions_n_days = local_scaler.inverse_transform(to_predict_scaled)
         predictions_n_days = predictions_n_days[-n_days:]
         final_predictions = pd.DataFrame(predictions_n_days, columns=['Predicted Closing Price'], dtype=object)
 
-
-        
+        # Create function for visualization purposes 
         def plot_predictions_data(dataset):
             df = pd.DataFrame(dataset)
             plt.style.use('fivethirtyeight')
@@ -259,7 +267,7 @@ else:
         with col7:
             st.write("")
         with col8:
-            st.subheader(f"{selected_model} with {hidden_layers+1} hidden layers")
+            st.subheader(f"{selected_model} with {hidden_layers} hidden layers")
         with col9:
             st.write("")
 

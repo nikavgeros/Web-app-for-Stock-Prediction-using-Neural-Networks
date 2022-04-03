@@ -35,15 +35,16 @@ if __name__ == "__main__":
         print('\n****** BUILDING MODELS ******')
         nn_list = [LSTM, GRU, SimpleRNN]
         for nn in nn_list:
+            print(f'\n****** {nn.__name__} ******')
             current_nn = build_three_layers_nn(X=X_train, y=y_train, model=nn, first_layer_units=100, second_layer_units=150, third_layer_units=150, file=f'{model_dir}{stock}_{nn.__name__}_3layers.h5')
 
-            print('/n****** PREDICTIONS ******')
+            print('\n****** PREDICTIONS ******')
             predictions = make_predictions(data=X_test, model=current_nn, scaler=scaler)
 
-            print('/n****** RMSE ******')
+            print('\n****** RMSE ******')
             rmse = rmse_calculate(actual=test, predicted=predictions)
 
-            print('/n****** VISUALIZATION ******')
+            print('\n****** VISUALIZATION ******')
             visualization(actual=test, predicted=predictions, title=f'{stock} Price Prediction with RMSE {round(rmse,3)}', file=f'{img_dir}{stock}_{nn.__name__}_3layers_{round(rmse,3)}.png')
 
 
