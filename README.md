@@ -20,6 +20,7 @@ Implementation of Neural Networks with different achritectures and great predict
   <li>three_layer_nn.py --builds neural networks with three layer</li>
   <li>utils.py --contains all the functions needed for the develepment of neural networks</li>
   <li>stock_prediction_app.py --contains the web application implemented with streamlit</li>
+  <li>requirements.txt --contains the version of each library used in the .py files. In addition, its required to deploye the app</li>
 </ol>
 
 ### Books
