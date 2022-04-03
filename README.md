@@ -7,7 +7,7 @@ Analyzing time series and predicting their future prices is one of the most impo
 The financial information and the stock prices are available at yfinance package, developed by Ran Aroussi and maintained by himself along with other contributors. It is an open-source tool that uses Yahoo’s publicly available APIs and is intended for reach and educational purposes. The Ticker module allows us to get valuable information on the company such as business summary, recommendations, dividends, splits, major stakeholders, and many more. The stock prices are available in a format that includes the Date, the stock prices such as Open, Close, High, Low, Adj Close and the Volume which refers to the number of traded shares. We specify a date range within five years, beginning from 2016/01/01 till 2021/09/30 containing 1453 historical prices. Most of the features are numerical except from Date feature which refers to the dates of the Stock Market Calendar.
 
 ### Goal 
-Deep Neural Networks implementation with great predictive capability to integrate them to a web-base application for stock price prediction.
+implementation of Neural Networks with different achritectures and great predictive capability to integrate them into a web-base application for stock price prediction.
 
 ### This repository contains the following files:
 <ol>
