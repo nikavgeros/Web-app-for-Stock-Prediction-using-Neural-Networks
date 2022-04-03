@@ -23,7 +23,7 @@ if __name__ == "__main__":
         train, test = splitting_data(data=data, split_date=split_date)
 
         print('\n****** FEATURE SCALING ******')
-        train_scaled, scaler = scale_data(data=train, file=f"{scaler_path}{stock}_Scaler_2layers.pickle", save=True)
+        train_scaled, scaler = scale_data(data=train, file=f"{scaler_dir}{stock}_Scaler_2layers.pickle", save=True)
 
         print('\n****** TRAIN TO SUPERVISED ******')
         X_train, y_train = train_to_supervised(data=train_scaled, start=timesteps, end=len(train))
@@ -34,7 +34,7 @@ if __name__ == "__main__":
         print('\n****** BUILDING MODELS ******')
         nn_list = [LSTM, GRU, SimpleRNN]
         for nn in nn_list:
-            current_nn = build_two_layers_nn(X=X_train, y=y_train, model=nn, first_layer_units=100, second_layer_units=150, file=f'{model_path}{stock}_{nn.__name__}_2layers.h5')
+            current_nn = build_two_layers_nn(X=X_train, y=y_train, model=nn, first_layer_units=100, second_layer_units=150, file=f'{model_dir}{stock}_{nn.__name__}_2layers.h5')
 
             print('/n****** PREDICTIONS ******')
             predictions = make_predictions(data=X_test, model=current_nn, scaler=scaler)
@@ -43,6 +43,6 @@ if __name__ == "__main__":
             rmse = rmse_calculate(actual=test, predicted=predictions)
 
             print('/n****** VISUALIZATION ******')
-            visualization(actual=test, predicted=predictions, title=f'{stock} Price Prediction with RMSE {round(rmse,3)}', file=f'Images\\{stock}_{nn.__name__}_2layers_{round(rmse,3)}.png')
+            visualization(actual=test, predicted=predictions, title=f'{stock} Price Prediction with RMSE {round(rmse,3)}', file=f'{img_dir}{stock}_{nn.__name__}_2layers_{round(rmse,3)}.png')
 
 
